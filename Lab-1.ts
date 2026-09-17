@@ -1,4 +1,5 @@
 //All the listings for the project as JS objects
+//Neil D (2026)
 //Task 1:
 //Create an interface Listing that will represent an object
 //from the listings array below to resolve the type error.
