@@ -532,7 +532,7 @@ const listing0Updated: Listing = {
   ...listing0, 
   isSold: false, 
   currentOwner: "Janes Doe",
-}
+};
 
 /**
  * NOTE: THIS TASK IS TRICKY!
@@ -558,13 +558,16 @@ const listing0Updated: Listing = {
 
 function realtorFees(listing: Listing): number {
   const price: number = parseInt(
-    listing.price.replace("$","").replace(",","")
+    listing.price.replace("$", "").replace(",", "")
   );
   return Math.round(
     price <= 450000 ? price * 0.025 
     : price * 0.02
   );
 }
+
+console.log(realtorFees(listings[0]));
+console.log(realtorFees(listings[5]));
 
 /**
  * Task-5:
@@ -573,9 +576,17 @@ function realtorFees(listing: Listing): number {
  */
 //WRITE YOUR CODE BELOW
 
-const listingAscendingly: Listing[] = [...listings].sort((a, b) => {
-  const yearA = parseInt(a.propertySummary.builtIn.match)
+function getBuiltInYear(builtIn: string): number {
+  const parts = builtIn.split(" ");
+  const year = parts[parts.length - 1];
+
+  return parseInt(year) || 0;
+}
+const listingAscendingly = [...listings].sort((a, b) => {
+    return (getBuiltInYear(a.propertySummary.builtIn) - getBuiltInYear(b.propertySummary.builtIn));
 });
+
+console.log(listingAscendingly);
 
 /**
  * Task-6:
@@ -585,3 +596,9 @@ const listingAscendingly: Listing[] = [...listings].sort((a, b) => {
  * This array should result in two listings only
  */
 //WRITE YOUR CODE BELOW
+
+const listingsAreTownhouse: Listing[] = listings.filter(
+  (listings) => listings.propertySummary.buildingType === "Townhouse"
+);
+
+console.log(listingsAreTownhouse);
